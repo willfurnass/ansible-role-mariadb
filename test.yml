@@ -1,7 +1,20 @@
-# Test playbook for Ansible role bertvv.mariadb
 ---
-
 - hosts: all
   become: true
+  vars:
+    mariadb_bind_address: '0.0.0.0'
+    mariadb_root_password: drowssap
+    mariadb_databases:
+      - name: myappdb
+        init_script: /etc/ansible/roles/role_under_test/docker-tests/init.sql
+      - name: myotherdb
+    mariadb_users:
+      - name: appusr
+        password: sekrit
+        priv: "myappdb.*:ALL,GRANT"
+        host: "%"
+      - name: otheruser
+        password: letmein
+        priv: "myotherdb.*:ALL"
   roles:
     - role_under_test
