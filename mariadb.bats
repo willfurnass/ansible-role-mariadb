@@ -8,7 +8,7 @@
 @test 'User ‘appusr’ should be able to run remote queries: SHOW TABLES' {
   mysql --host="${SUT_IP}" \
     --user=appusr \
-    --password=sekrit \
+    --password='tesiKy3lj@' \
     --execute="SHOW TABLES;" \
     myappdb
 }
@@ -16,7 +16,7 @@
 @test 'User ‘appusr’ should be able to run remote queries: SELECT' {
   mysql --host="${SUT_IP}" \
     --user=appusr \
-    --password=sekrit \
+    --password='tesiKy3lj@' \
     --execute="SELECT * FROM TestTable;" \
     myappdb
 }
@@ -24,7 +24,7 @@
 @test 'User ‘appusr’ should be able to run remote queries: UPDATE' {
   mysql --host="${SUT_IP}" \
     --user=appusr \
-    --password=sekrit \
+    --password='tesiKy3lj@' \
     --execute="UPDATE TestTable SET SurName='Smith' WHERE Id=1;" \
     myappdb
 }
@@ -32,7 +32,7 @@
 @test 'User ‘appusr’ should be able to run remote queries: INSERT' {
   mysql --host="${SUT_IP}" \
     --user=appusr \
-    --password=sekrit \
+    --password='tesiKy3lj@' \
     --execute="INSERT INTO TestTable (Id, GivenName, SurName) VALUES (100, 'Jimmy', 'Smith');" \
     myappdb
 }
@@ -40,7 +40,7 @@
 @test 'User ‘appusr’ should be able to run remote queries: DELETE' {
   mysql --host="${SUT_IP}" \
     --user=appusr \
-    --password=sekrit \
+    --password='tesiKy3lj@' \
     --execute="DELETE FROM TestTable WHERE Id=100;" \
     myappdb
 }
@@ -48,7 +48,7 @@
 @test 'User ‘appusr’ should not have access to ‘myotherdb’' {
   run mysql --host="${SUT_IP}" \
     --user=otheruser \
-    --password=letmein \
+    --password='ir3.quTeg8' \
     --execute="SHOW TABLES;" \
     otherdb
   [ "${status}" -ne 0 ]
@@ -59,7 +59,7 @@
 @test 'User ‘otheruser’ should not have access to ‘myotherdb’' {
   run mysql --host="${SUT_IP}" \
     --user=otheruser \
-    --password=letmein \
+    --password='ir3.quTeg8' \
     --execute="SHOW TABLES;" \
     otherdb
   [ "${status}" -ne 0 ]
