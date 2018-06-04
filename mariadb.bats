@@ -5,6 +5,16 @@
 # The variable SUT_IP, the IP address of the System Under Test must be set
 # outside of the script.
 
+@test 'Root user should not be able to run a query remotely' {
+  run mysql --host="${SUT_IP}" \
+    --user=root \
+    --password='BuIxB0ukAm' \
+    --execute="SHOW TABLES;" \
+    mysql
+
+  [ "${status}" -ne "0" ]
+}
+
 @test 'User ‘appusr’ should be able to run remote queries: SHOW TABLES' {
   mysql --host="${SUT_IP}" \
     --user=appusr \
