@@ -16,5 +16,11 @@
       - name: otheruser
         password: 'ir3.quTeg8'
         priv: "myotherdb.*:ALL"
+        append_privs: 'yes'
+    mariadb_custom_cnf:
+      mysqld:
+        general-log:
+        general-log-file: queries.log
+        log-output: file
   roles:
     - role_under_test
