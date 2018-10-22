@@ -2,6 +2,7 @@
 - hosts: all
   become: true
   vars:
+    mariadb_mirror: 'mariadb.mirror.nucleus.be/yum'
     mariadb_bind_address: '0.0.0.0'
     mariadb_root_password: 'BuIxB0ukAm'
     mariadb_databases:
