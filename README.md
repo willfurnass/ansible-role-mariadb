@@ -81,13 +81,14 @@ Remark the setting `general-log` was left empty, so doesn't get `=value` in the 
 
 ### Adding databases
 
-Databases are defined with a dict containing the fields `name:` (required), and `init_script:` (optional). The init script is a SQL file that is executed when the database is created to initialise tables and populate it with values.
+Databases are defined with a dict containing the fields `name:` (required), `init_script:` and `init_script_is_template` (both optional). The init script is a SQL file that is executed when the database is created to initialise tables and populate it with values.  It can be a templated file or a file that is interpretted literally.
 
 ```Yaml
 mariadb_databases:
   - name: appdb1
   - name: appdb2
     init_script: files/init_appdb2.sql
+    init_script_is_template: false
 ```
 
 ### Adding users

@@ -21,14 +21,22 @@
 
 # Below, the databases are initialised, but only when the database was created
 # in the previous step. This ensures idempotence.
-
 - name: Copy database init scripts
   copy:
     src: "{{ item.item.init_script }}"
     dest: "/tmp/{{ item.item.init_script|basename }}"
     mode: '0600'
   with_items: "{{ db_creation.results }}"
-  when: item.changed and item.item.init_script is defined
+  when: item.changed and item.item.init_script is defined and ((item.item.init_script_is_template is defined and not item.item.init_script_is_template) or item.item.init_script_is_template is not defined)
+  tags: mariadb
+
+- name: Template out database init scripts
+  template:
+    src: "{{ item.item.init_script }}"
+    dest: "/tmp/{{ item.item.init_script|basename }}"
+    mode: '0600'
+  with_items: "{{ db_creation.results }}"
+  when: item.changed and item.item.init_script is defined and item.item.init_script_is_template is defined and item.item.init_script_is_template 
   tags: mariadb
 
 - name: Initialise databases
